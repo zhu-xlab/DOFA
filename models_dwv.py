@@ -122,7 +122,7 @@ def vit_huge_patch14(**kwargs):
 
 
 if __name__=='__main__':
-    check_point = torch.load('ofa_checkpoint-99.pth')
+    check_point = torch.load('ofa_base_checkpoint_e99.pth')
     vit_model = vit_base_patch16()
     vit_model.load_state_dict(check_point['model'], strict=False)
     vit_model = vit_model.cuda()
