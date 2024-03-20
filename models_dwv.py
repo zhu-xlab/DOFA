@@ -1,37 +1,30 @@
-# Copyright (c) Meta Platforms, Inc. and affiliates.
-# All rights reserved.
-
-# This source code is licensed under the license found in the
-# LICENSE file in the root directory of this source tree.
-# --------------------------------------------------------
-# References:
-# timm: https://github.com/rwightman/pytorch-image-models/tree/master/timm
-# DeiT: https://github.com/facebookresearch/deit
-# --------------------------------------------------------
-
+import json
 from functools import partial
-from einops.layers.torch import Rearrange
-from wave_dynamic_layer import Dynamic_MLP_OFA, Dynamic_MLP_Decoder, Dynamic_Patch_Embed
-from operator import mul
-from torch.nn.modules.utils import _pair
-from torch.nn import Conv2d, Dropout
 
 import torch
 import torch.nn as nn
-import pdb
-import math
-from functools import reduce
-import json
+from timm.models.vision_transformer import Block
 
-from timm.models.vision_transformer import PatchEmbed, Block
-from util.pos_embed import get_2d_sincos_pos_embed, get_1d_sincos_pos_embed_from_grid_torch
+from wave_dynamic_layer import Dynamic_MLP_OFA
+
 
 class OFAViT(nn.Module):
-    """ Masked Autoencoder with VisionTransformer backbone
-    """
-    def __init__(self, img_size=224, patch_size=16, drop_rate=0.,
-                 embed_dim=1024, depth=24, num_heads=16, wv_planes=128, num_classes=45,
-                 global_pool=True, mlp_ratio=4., norm_layer=nn.LayerNorm):
+    """Masked Autoencoder with VisionTransformer backbone"""
+
+    def __init__(
+        self,
+        img_size=224,
+        patch_size=16,
+        drop_rate=0.0,
+        embed_dim=1024,
+        depth=24,
+        num_heads=16,
+        wv_planes=128,
+        num_classes=45,
+        global_pool=True,
+        mlp_ratio=4.0,
+        norm_layer=nn.LayerNorm,
+    ):
         super().__init__()
 
         self.wv_planes = wv_planes
@@ -45,26 +38,40 @@ class OFAViT(nn.Module):
 
         # --------------------------------------------------------------------------
         # MAE encoder specifics
-        self.patch_embed = Dynamic_MLP_OFA(wv_planes=128, inter_dim=128, kernel_size=16, embed_dim=embed_dim)
+        self.patch_embed = Dynamic_MLP_OFA(
+            wv_planes=128, inter_dim=128, kernel_size=16, embed_dim=embed_dim
+        )
         self.num_patches = (img_size // patch_size) ** 2
         self.cls_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
-        #---------------------------------------------------------------------------
-        self.pos_embed = nn.Parameter(torch.zeros(1, self.num_patches + 1, embed_dim), requires_grad=False)  # fixed sin-cos embedding
+        # ---------------------------------------------------------------------------
+        self.pos_embed = nn.Parameter(
+            torch.zeros(1, self.num_patches + 1, embed_dim), requires_grad=False
+        )  # fixed sin-cos embedding
 
-        self.blocks = nn.ModuleList([
-            Block(embed_dim, num_heads, mlp_ratio, qkv_bias=True, norm_layer=norm_layer)
-            for i in range(depth)])
+        self.blocks = nn.ModuleList(
+            [
+                Block(
+                    embed_dim,
+                    num_heads,
+                    mlp_ratio,
+                    qkv_bias=True,
+                    norm_layer=norm_layer,
+                )
+                for i in range(depth)
+            ]
+        )
 
         self.head_drop = nn.Dropout(drop_rate)
-        self.head = nn.Linear(embed_dim, num_classes) if num_classes > 0 else nn.Identity()
-
+        self.head = (
+            nn.Linear(embed_dim, num_classes) if num_classes > 0 else nn.Identity()
+        )
 
     def forward_features(self, x, wave_list):
         # embed patches
         wavelist = torch.tensor(wave_list, device=x.device).float()
         self.waves = wavelist
 
-        x,_ = self.patch_embed(x, self.waves)
+        x, _ = self.patch_embed(x, self.waves)
 
         x = x + self.pos_embed[:, 1:, :]
         # append cls token
@@ -96,40 +103,64 @@ class OFAViT(nn.Module):
 
 def vit_small_patch16(**kwargs):
     model = OFAViT(
-        patch_size=16, embed_dim=384, depth=12, num_heads=6, mlp_ratio=4,
-        norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
+        patch_size=16,
+        embed_dim=384,
+        depth=12,
+        num_heads=6,
+        mlp_ratio=4,
+        norm_layer=partial(nn.LayerNorm, eps=1e-6),
+        **kwargs,
+    )
     return model
+
 
 def vit_base_patch16(**kwargs):
     model = OFAViT(
-        patch_size=16, embed_dim=768, depth=12, num_heads=12, mlp_ratio=4,
-        norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
+        patch_size=16,
+        embed_dim=768,
+        depth=12,
+        num_heads=12,
+        mlp_ratio=4,
+        norm_layer=partial(nn.LayerNorm, eps=1e-6),
+        **kwargs,
+    )
     return model
 
 
 def vit_large_patch16(**kwargs):
     model = OFAViT(
-        patch_size=16, embed_dim=1024, depth=24, num_heads=16, mlp_ratio=4,
-        norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
+        patch_size=16,
+        embed_dim=1024,
+        depth=24,
+        num_heads=16,
+        mlp_ratio=4,
+        norm_layer=partial(nn.LayerNorm, eps=1e-6),
+        **kwargs,
+    )
     return model
 
 
 def vit_huge_patch14(**kwargs):
     model = OFAViT(
-        patch_size=14, embed_dim=1280, depth=32, num_heads=16, mlp_ratio=4,
-        norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
+        patch_size=14,
+        embed_dim=1280,
+        depth=32,
+        num_heads=16,
+        mlp_ratio=4,
+        norm_layer=partial(nn.LayerNorm, eps=1e-6),
+        **kwargs,
+    )
     return model
 
 
-if __name__=='__main__':
-    check_point = torch.load('ofa_base_checkpoint_e99.pth')
+if __name__ == "__main__":
+    check_point = torch.load("ofa_base_checkpoint_e99.pth")
     vit_model = vit_base_patch16()
-    vit_model.load_state_dict(check_point['model'], strict=False)
+    vit_model.load_state_dict(check_point["model"], strict=False)
     vit_model = vit_model.cuda()
-    C = 2  # can be 2,3,4,6,9,12,13,202 or any number if you can provide the wavelengths of them
-    inp = torch.randn([1,C,224,224]).cuda()
-    with open('waves.json','r') as wf:
+    C = 2  # number of channels
+    inp = torch.randn([1, C, 224, 224]).cuda()
+    with open("waves.json", "r") as wf:
         wavelists = json.load(wf)
-    test_out = vit_model(inp, wave_list=wavelists[f'{C}'])
+    test_out = vit_model(inp, wave_list=wavelists[f"{C}"])
     print(test_out.shape)
-
