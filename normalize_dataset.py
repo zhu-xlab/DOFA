@@ -10,8 +10,8 @@ from torch.utils.data import Dataset
 warnings.filterwarnings("ignore", category=rasterio.errors.NotGeoreferencedWarning)
 
 # vh,vv
-S1_MEAN = [166.36275909, 88.45542715]  # / 255.0
-S1_STD = [64.83126309, 43.07350145]  # /255.0
+S1_MEAN = [166.36275909, 88.45542715]
+S1_STD = [64.83126309, 43.07350145]
 
 S2_MEAN = [
     114.1099739,
@@ -464,7 +464,6 @@ class DataAugmentation(torch.nn.Module):
 
     @torch.no_grad()
     def forward(self, x):
-        # x = kornia.image_to_tensor(x_np, keepdim=True)  # CxHxW
         x_out = self.transform(x)
         return x_out
 
@@ -472,8 +471,6 @@ class DataAugmentation(torch.nn.Module):
 class Sentinel1Dataset(Dataset):
     # vv,vh
     def __init__(self, root_dir, split="train", transform=True):
-        # self.root_dir = root_dir
-        # self.split = split
         if transform:
             self.transform = DataAugmentation(mean=S1_MEAN, std=S1_STD)
         else:
@@ -519,7 +516,6 @@ class Sentinel2Dataset(Dataset):
                 ch = f.read()
             chs.append(ch)
         s2_img = np.concatenate(chs, 0).astype("float32")
-        # pdb.set_trace()
         if self.transform:
             s2_img = torch.from_numpy(s2_img)
             s2_img = self.transform(s2_img).squeeze(0)
@@ -535,8 +531,6 @@ class Sentinel2Dataset(Dataset):
 class NAIPDataset(Dataset):
     # r,g,b
     def __init__(self, root_dir, split="train", transform=True):
-        # self.root_dir = root_dir
-        # self.split = split
         if transform:
             self.transform = DataAugmentation(mean=NAIP_MEAN, std=NAIP_STD)
         else:
@@ -563,10 +557,7 @@ class NAIPDataset(Dataset):
 
 
 class HyperDataset(Dataset):
-    # ...
     def __init__(self, root_dir, split="train", transform=True):
-        # self.root_dir = root_dir
-        # self.split = split
         if transform:
             self.transform = DataAugmentation(mean=Hyper_MEAN, std=Hyper_STD)
         else:
@@ -600,18 +591,16 @@ class HyperDataset(Dataset):
             166,
         ]
         self.valid_channels_ids = [c for c in range(224) if c not in invalid_channels]
-        # self.num_valid_channels = len(valid_channels_ids)
 
     def __getitem__(self, index):
         meta_idx = self.meta_list[index]
         im_path = meta_idx["filename"]
         with rasterio.open(im_path) as f:
-            hyper_img = f.read()  # .astype('float32')
+            hyper_img = f.read()
             hyper_img = hyper_img[self.valid_channels_ids]
             hyper_img = np.clip(hyper_img, a_min=0, a_max=10000)
             hyper_img = (hyper_img - 0) / (10000 - 0)
             hyper_img = hyper_img.astype(np.float32)
-        # print(hyper_img.shape)
 
         if self.transform:
             hyper_img = torch.from_numpy(hyper_img)
@@ -628,8 +617,6 @@ class HyperDataset(Dataset):
 class GaufenDataset(Dataset):
     # r,g,b,nir ?
     def __init__(self, root_dir, split="train", transform=True):
-        # self.root_dir = root_dir
-        # self.split = split
         if transform:
             self.transform = DataAugmentation(mean=Gaufen_MEAN, std=Gaufen_STD)
         else:
