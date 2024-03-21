@@ -14,7 +14,7 @@ The requirements of DOFA can be installed as follows:
 
 ### Weights
 
-Pre-trained model weights can be downloaded from [HuggingFace](https://huggingface.co/XShadow/DOFA-Net).
+Pre-trained model weights can be downloaded from [HuggingFace](https://huggingface.co/XShadow/DOFA).
 
 ## Usage
 
