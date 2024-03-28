@@ -1,4 +1,4 @@
-# [DOFA](https://github.com/ShadowXZT/DOFA-pytorch)
+# [DOFA](https://github.com/ShadowXZT/DOFA-pytorch): Dynamic One-For-All foundation model for remote sensing and earth observation
 **What is DOFA**: DOFA is a unified multimodal foundation model for different data modalities in remote sensing and Earth observation.
 <p align="center">
 <img src="assets/DOFA-main.png" width="500">
