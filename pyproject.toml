@@ -1,5 +1,0 @@
-[tool.isort]
-profile = "black"
-known_first_party = ["util"]
-skip_gitignore = true
-color_output = true

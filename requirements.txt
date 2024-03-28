@@ -1,6 +1,0 @@
-Dataset4EO @ git+https://github.com/EarthNets/Dataset4EO
-kornia
-numpy
-rasterio
-timm
-torch
