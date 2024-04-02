@@ -125,7 +125,11 @@ s1_img = s1_img.view([1,2,224,224]).cuda()
     
 ![png](assets/demo_4_0.png)
     
-
+### Download the pre-trained weights for DOFA from huggingface
+```python
+cd checkpoints
+python download_weights.py
+```
 
 ### Load the pre-trained weights of DOFA base model
 
