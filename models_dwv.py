@@ -10,7 +10,6 @@
 # --------------------------------------------------------
 
 from functools import partial
-from einops.layers.torch import Rearrange
 from wave_dynamic_layer import Dynamic_MLP_OFA, Dynamic_MLP_Decoder
 from operator import mul
 from torch.nn.modules.utils import _pair
