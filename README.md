@@ -127,7 +127,6 @@ s1_img = s1_img.view([1,2,224,224]).cuda()
     
 ### Download the pre-trained weights for DOFA from huggingface
 ```python
-cd checkpoints
 python download_weights.py
 ```
 
