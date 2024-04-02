@@ -46,6 +46,34 @@ Please refer to [demo.ipynb](https://github.com/ShadowXZT/DOFA-pytorch/blob/mast
 
 DOFA supports input images with any number of channels using our pre-trained foundation models. The following examples show how to use DOFA for **Sentinel-1 (SAR)**, **Sentinel-2**, **NAIP RGB**. We will add example usage for Gaofen Multispectral, and Hyperspectral data soon.
 
+---
+
+The following examples show that how to use **a single DOFA model** to process image data from **different modalities** with **any number of channels**!
+
+---
+
+
+### Download the pre-trained weights for DOFA from huggingface
+```python
+python download_weights.py
+```
+
+### Load the pre-trained weights of DOFA base model
+
+
+```python
+from models_dwv import vit_base_patch16
+
+check_point = torch.load('./DOFA_ViT_base_e100.pth')
+vit_model = vit_base_patch16()
+msg = vit_model.load_state_dict(check_point, strict=False)
+# missing_keys=['fc_norm.weight', 'fc_norm.bias', 'head.weight', 'head.bias'], unexpected_keys=['mask_token', 'norm.weight', 'norm.bias', 'projector.weight', 'projector.bias']
+vit_model = vit_model.cuda()
+```
+
+Now you can use **the loaded single DOFA model** to process image data from **different modalities** with **any number of channels**!
+
+
 ### Preprare for the data loading and preprocessing
 
 ```python
@@ -124,24 +152,6 @@ s1_img = s1_img.view([1,2,224,224]).cuda()
 
     
 ![png](assets/demo_4_0.png)
-    
-### Download the pre-trained weights for DOFA from huggingface
-```python
-python download_weights.py
-```
-
-### Load the pre-trained weights of DOFA base model
-
-
-```python
-from models_dwv import vit_base_patch16
-
-check_point = torch.load('./DOFA_ViT_base_e100.pth')
-vit_model = vit_base_patch16()
-msg = vit_model.load_state_dict(check_point, strict=False)
-# missing_keys=['fc_norm.weight', 'fc_norm.bias', 'head.weight', 'head.bias'], unexpected_keys=['mask_token', 'norm.weight', 'norm.bias', 'projector.weight', 'projector.bias']
-vit_model = vit_model.cuda()
-```
 
 
 ```python
