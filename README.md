@@ -64,7 +64,7 @@ python download_weights.py
 ```python
 from models_dwv import vit_base_patch16
 
-check_point = torch.load('./DOFA_ViT_base_e100.pth')
+check_point = torch.load('./checkpoints/DOFA_ViT_base_e100.pth')
 vit_model = vit_base_patch16()
 msg = vit_model.load_state_dict(check_point, strict=False)
 # missing_keys=['fc_norm.weight', 'fc_norm.bias', 'head.weight', 'head.bias'], unexpected_keys=['mask_token', 'norm.weight', 'norm.bias', 'projector.weight', 'projector.bias']
