@@ -85,11 +85,21 @@ mim train mmpretrain configs/dofa_base_resisc45.py --launcher slurm \
 
 *More results are comming soon...*
 
+In the next version, we will integrate DOFA to the [EarthNets](https://earthnets.github.io/) platform.
 ## Citation
 
 <!-- Replace to the citation of the paper your project refers to. -->
 
 ```BibTeX
+@misc{xiong2024earthnets,
+      title={EarthNets: Empowering AI in Earth Observation}, 
+      author={Zhitong Xiong and Fahong Zhang and Yi Wang and Yilei Shi and Xiao Xiang Zhu},
+      year={2024},
+      eprint={2210.04936},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+
 @misc{xiong2024neural,
       title={Neural Plasticity-Inspired Foundation Model for Observing the Earth Crossing Modalities}, 
       author={Zhitong Xiong and Yi Wang and Fahong Zhang and Adam J. Stewart and Joëlle Hanna and Damian Borth and Ioannis Papoutsis and Bertrand Le Saux and Gustau Camps-Valls and Xiao Xiang Zhu},
