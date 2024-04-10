@@ -24,7 +24,6 @@ from functools import reduce
 import json
 
 from timm.models.vision_transformer import PatchEmbed, Block
-from util.pos_embed import get_2d_sincos_pos_embed, get_1d_sincos_pos_embed_from_grid_torch
 
 class OFAViT(nn.Module):
     """ Masked Autoencoder with VisionTransformer backbone
