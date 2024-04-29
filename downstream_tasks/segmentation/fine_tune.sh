@@ -1,3 +1,4 @@
+#Run the following cmd once in the shell
 export PYTHONPATH=`pwd`:$PYTHONPATH
 
-mim train mmpretrain configs/dofa_base_resisc45.py --launcher pytorch --gpus 4
+mim train mmsegmentation configs/dofa_vit_seg.py --launcher pytorch --gpus 4

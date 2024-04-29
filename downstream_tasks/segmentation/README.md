@@ -1,17 +1,19 @@
-# DOFA for image classification
+# DOFA for semantic segmentation
 
 DOFA is a versatile foundation model for remote sensing images from multi-sensors.  
-Here, we show example usages for the image classification downstream task.
+Here, we show example usages for the semantic segmentation downstream tasks.
 ## Usage
 
 ### Setup Environment
-Please install the [mmpretrain](https://github.com/open-mmlab/mmpretrain) first.
+Please install the [mmsegmentation](https://github.com/open-mmlab/mmsegmentation) first.
 You can either install it as a Python package
 ```python
 pip install -U openmim
-mim install "mmpretrain>=1.0.0rc8"
+mim install mmengine
+mim install "mmcv>=2.0.0"
+pip install "mmsegmentation>=1.0.0"
 ```
-or refer to [Get Started](https://mmpretrain.readthedocs.io/en/latest/get_started.html) to install MMPreTrain by other means.
+or refer to [Get Started](https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/get_started.md#installation) to install it by other means.
 
 At first, add the current folder to `PYTHONPATH`, so that Python can find your code. Run command in the current directory to add it.
 
@@ -23,7 +25,7 @@ export PYTHONPATH=`pwd`:$PYTHONPATH
 
 ### Data Preparation
 
-We use the [RESISC-45](https://1drv.ms/u/s!AmgKYzARBl5ca3HNaHIlzp_IXjs) dataset as an example.
+We use the [SegMunich](https://huggingface.co/datasets/Moonboy12138/SegMunich/blob/main/TUM_128.zip) dataset as an example.
 You can also prepare any datasets following the same directory structure.
 
 ###### 1. Please download the NWPU-RESISC45 dataset and extract the files to datasets folder. 
@@ -31,22 +33,28 @@ You can also prepare any datasets following the same directory structure.
 
 Then the dataset structure should be:
 ```
-dataset/NWPU-RESISC45/
+dataset/SegMunich/
+├── dataset/
+│   ├── train.txt
+│   ├── val.txt
 |
-│train.txt
-│val.txt
-|
-├── airplane/
-│   ├── airplane_415.jpg
-│   ├── airplane_261.jpg
-│   ├── airplane_364.jpg
-├── desert/
-│   ├── desert_148.jpg
-│   ├── desert_165.jpg
-│   ├── desert_118.jpg
+├── train/
+│   ├── img
+│   |   ├── xxx.tif
+│   |   ├── xxx.tif
+│   ├── label
+│   |   ├── xxx.tif
+│   |   ├── xxx.tif
+├── val/
+│   ├── img
+│   |   ├── xxx.tif
+│   |   ├── xxx.tif
+│   ├── label
+│   |   ├── xxx.tif
+│   |   ├── xxx.tif
 ...
 ```
-More details about the dataset structure can be found at [instruction](https://mmpretrain.readthedocs.io/en/latest/user_guides/dataset_prepare.html#imagenet).
+More details about the dataset structure can be found at [instruction](https://mmsegmentation.readthedocs.io/en/latest/advanced_guides/add_datasets.html).
 
 
 ### Set up the path of pretrained weights 
@@ -59,29 +67,29 @@ Edit the #90 line of the config file: *configs/dofa_base_resisc45.py* to set up 
 **To train with single GPU:**
 
 ```bash
-mim train mmpretrain configs/dofa_base_resisc45.py
+mim train mmsegmentation configs/dofa_vit_seg.py
 ```
 
 **To train with multiple GPUs:**
 
 ```bash
-mim train mmpretrain configs/dofa_base_resisc45.py --launcher pytorch --gpus 8
+mim train mmsegmentation configs/dofa_vit_seg.py --launcher pytorch --gpus 8
 ```
 
 **To train with multiple GPUs by slurm:**
 
 ```bash
-mim train mmpretrain configs/dofa_base_resisc45.py --launcher slurm \
+mim train mmsegmentation configs/dofa_vit_seg.py --launcher slurm \
     --gpus 16 --gpus-per-node 8 --partition $PARTITION
 ```
 
 ## Results
 
-|       Model        |   Pretrain   | Top-1 (%) | Top-5 (%) |                 Config                  |                Download                |
-| :----------------: | :----------: | :-------: | :-------: | :-------------------------------------: | :------------------------------------: |
-|  ResNet50   | From scratch |   89.33   |   -   | [config](./configs/resnet50_8xb32_in1k.py)  | [model]() \| [log]() |
-| DOFA-base | [foundation model](https://huggingface.co/XShadow/DOFA) |   97.25   |   99.86   | [config](./configs/dofa_base_resisc45.py) | [model]() \| [log]() |
-| DOFA-large  | [foundation model](https://huggingface.co/XShadow/DOFA) |   -   |   -   | [config]()  |        [model]() \| [log]() |
+|       Model        |   Pretrain   | Top-1 (%) |     Config                  |                Download                |
+| :----------------: | :----------: | :-------: | :-------: | :-------------------------------------: |
+|  Deeplabv3+ ResNet50   | ImageNet |   68.21  | [config](./configs/resnet50_8xb32_in1k.py)  | [model]() \| [log]()
+| DOFA-base | [foundation model](https://huggingface.co/XShadow/DOFA) |   -  | [config](./configs/dofa_base_resisc45.py) | [model]() \| [log]()
+| DOFA-large  | [foundation model](https://huggingface.co/XShadow/DOFA) |   -   | [config]()  |        [model]() \| [log]()
 
 *More results are comming soon...*
 
