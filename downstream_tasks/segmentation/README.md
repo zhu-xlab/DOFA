@@ -59,7 +59,7 @@ More details about the dataset structure can be found at [instruction](https://m
 
 ### Set up the path of pretrained weights 
 
-Edit the #90 line of the config file: *configs/dofa_base_resisc45.py* to set up the path to the pre-trained weights.
+Edit the #89 line of the config file: *configs/dofa_vit_seg.py* to set up the path to the pre-trained weights.
 
 
 ### Training commands
