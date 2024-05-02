@@ -4,7 +4,8 @@ __pycache__/
 *$py.class
 
 # downstream tasks
-downstream_tasks/*
+downstream_tasks/segmentation/dataset/*
+downstream_tasks/classification/dataset/*
 
 # C extensions
 *.so
