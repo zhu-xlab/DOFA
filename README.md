@@ -310,11 +310,9 @@ y = model(x, wavelengths)
 If you find the DOFA useful in your research, please kindly cite our paper:
 ```
 @article{xiong2024neural,
-      title={Neural Plasticity-Inspired Foundation Model for Observing the Earth Crossing Modalities}, 
-      author={Zhitong Xiong and Yi Wang and Fahong Zhang and Adam J. Stewart and Joëlle Hanna and Damian Borth and Ioannis Papoutsis and Bertrand Le Saux and Gustau Camps-Valls and Xiao Xiang Zhu},
-      year={2024},
-      eprint={2403.15356},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+  title={Neural Plasticity-Inspired Foundation Model for Observing the {Earth} Crossing Modalities},
+  author={Xiong, Zhitong and Wang, Yi and Zhang, Fahong and Stewart, Adam J and Hanna, Jo{\"e}lle and Borth, Damian and Papoutsis, Ioannis and Saux, Bertrand Le and Camps-Valls, Gustau and Zhu, Xiao Xiang},
+  journal={arXiv preprint arXiv:2403.15356},
+  year={2024}
 }
 ```
