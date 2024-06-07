@@ -10,7 +10,7 @@ You can either install it as a Python package
 ```python
 pip install -U openmim
 mim install mmengine
-mim install "mmcv>=2.0.0"
+mim install "mmcv==2.1.0"
 pip install "mmsegmentation>=1.0.0"
 ```
 or refer to [Get Started](https://github.com/open-mmlab/mmsegmentation/blob/main/docs/en/get_started.md#installation) to install it by other means.
