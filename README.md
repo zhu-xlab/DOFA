@@ -14,7 +14,7 @@ important brain mechanism for adjusting to new experiences or environmental shif
 <img src="assets/DOFA-model.png" width="500">
 </p>
 
-As the current version of DOFA uses linear layers in the dynamic weight generator, it's better to keep the channels in ascending order. 
+**As the current version of DOFA uses linear layers in the dynamic weight generator, it's better to keep the channels in ascending order. **
 
 For more details, please take a look at the paper [Neural Plasticity-Inspired Foundation Model for Observing the Earth Crossing Modalities](https://arxiv.org/abs/2403.15356).
 
