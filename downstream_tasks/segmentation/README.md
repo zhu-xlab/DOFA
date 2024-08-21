@@ -25,7 +25,7 @@ export PYTHONPATH=`pwd`:$PYTHONPATH
 
 ### Data Preparation
 
-We use the [SegMunich](https://huggingface.co/datasets/Moonboy12138/SegMunich/blob/main/TUM_128.zip) dataset as an example.
+We use the [SegMunich](https://huggingface.co/datasets/XShadow/SegMunich) dataset as an example.
 You can also prepare any datasets following the same directory structure.
 
 ###### 1. Please download the NWPU-RESISC45 dataset and extract the files to datasets folder. 
