@@ -1,4 +1,11 @@
+
 # [DOFA](https://github.com/ShadowXZT/DOFA-pytorch)
+
+
+> 🚨 **!!! A new version of DOFA weights has been released !!!**
+>
+> Please use the new version of codes and weights. The performance is much better!
+
 ## Dynamic One-For-All foundation model for Remote sensing and Earth observation
 **What is DOFA**: DOFA is a unified multimodal foundation model for different data modalities in remote sensing and Earth observation.
 <p align="center">
@@ -14,11 +21,8 @@ important brain mechanism for adjusting to new experiences or environmental shif
 <img src="assets/DOFA-model.png" width="500">
 </p>
 
-**As the current version of DOFA uses linear layers in the dynamic weight generator, it's better to arrange the channels in ascending order of wavelengths.**
 
 For more details, please take a look at the paper [Neural Plasticity-Inspired Foundation Model for Observing the Earth Crossing Modalities](https://arxiv.org/abs/2403.15356).
-
-
 
 ## Why develop DOFA
 - The learned multimodal representation may not effectively capture such an intersensor relationship.
