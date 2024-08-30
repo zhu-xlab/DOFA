@@ -4,7 +4,7 @@
 
 > 🚨 **!!! A new version of DOFA weights has been released !!!**
 >
-> Please use the new version of codes and weights. The performance is much better!
+> Please use the new version of codes and [weights](https://huggingface.co/XShadow/DOFA). The performance is much better!
 
 ## Dynamic One-For-All foundation model for Remote sensing and Earth observation
 **What is DOFA**: DOFA is a unified multimodal foundation model for different data modalities in remote sensing and Earth observation.
