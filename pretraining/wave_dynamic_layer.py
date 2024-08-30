@@ -230,7 +230,8 @@ class Dynamic_MLP_OFA(nn.Module):
         weight,bias = self._get_weights(waves) #3x3x3
         #bias = None
 
-        dynamic_weight = weight.view(self.embed_dim, inplanes, self.kernel_size, self.kernel_size) #3xoutdx16x16
+        dynamic_weight = weight.view(inplanes, self.kernel_size, self.kernel_size, self.embed_dim)
+        dynamic_weight = dynamic_weight.permute([3,0,1,2])
         if bias is not None:
             bias = bias.view([self.embed_dim]) * self.scaler
 
