@@ -83,13 +83,25 @@ mim train mmsegmentation configs/dofa_vit_seg.py --launcher slurm \
     --gpus 16 --gpus-per-node 8 --partition $PARTITION
 ```
 
-## Results
+## Results on SegMunich dataset
 
-|       Model        |   Pretrain   | Top-1 (%) |     Config                  |                Download                |
-| :----------------: | :----------: | :-------: | :-------: | :-------------------------------------: |
-|  Deeplabv3+ ResNet50   | ImageNet |   68.21  | [config](./configs/resnet50_8xb32_in1k.py)  | [model]() \| [log]()
-| DOFA-base | [foundation model](https://huggingface.co/XShadow/DOFA) |   -  | [config](./configs/dofa_base_resisc45.py) | [model]() \| [log]()
-| DOFA-large  | [foundation model](https://huggingface.co/XShadow/DOFA) |   -   | [config]()  |        [model]() \| [log]()
++-----------------+-------+-------+
+|      Class      |  IoU  |  Acc  |
++-----------------+-------+-------+
+|    Background   | 89.38 | 95.62 |
+|   Arable land   | 73.52 | 87.38 |
+|   Perm. Crops   | 25.78 | 35.45 |
+|     Pastures    | 52.19 | 69.24 |
+|     Forests     |  84.2 | 91.29 |
+|  Surface water  | 76.15 | 87.03 |
+|      Shrub      | 17.96 | 24.15 |
+|   Open spaces   |  34.7 | 49.39 |
+|     Wetlands    | 41.04 | 54.36 |
+|    Mine dump    | 39.54 | 51.51 |
+| Artificial veg. | 24.37 | 32.43 |
+|   Urban fabric  | 68.31 | 83.07 |
+|    Buildings    | 53.73 | 68.35 |
++-----------------+-------+-------+
 
 *More results are comming soon...*
 
