@@ -83,11 +83,10 @@ mim train mmsegmentation configs/dofa_vit_seg.py --launcher slurm \
     --gpus 16 --gpus-per-node 8 --partition $PARTITION
 ```
 
-## Results on SegMunich dataset
+## Results on SegMunich dataset (mIoU )
 
-+-----------------+-------+-------+
 |      Class      |  IoU  |  Acc  |
-+-----------------+-------+-------+
+|-----------------|-------|-------|
 |    Background   | 89.38 | 95.62 |
 |   Arable land   | 73.52 | 87.38 |
 |   Perm. Crops   | 25.78 | 35.45 |
@@ -101,7 +100,6 @@ mim train mmsegmentation configs/dofa_vit_seg.py --launcher slurm \
 | Artificial veg. | 24.37 | 32.43 |
 |   Urban fabric  | 68.31 | 83.07 |
 |    Buildings    | 53.73 | 68.35 |
-+-----------------+-------+-------+
 
 *More results are comming soon...*
 
