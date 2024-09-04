@@ -83,7 +83,7 @@ mim train mmsegmentation configs/dofa_vit_seg.py --launcher slurm \
     --gpus 16 --gpus-per-node 8 --partition $PARTITION
 ```
 
-## Results on SegMunich dataset (mIoU 52.37%)
+## Results on SegMunich dataset (mIoU 52.37%, mAcc 83.32%)
 
 |      Class      |  IoU  |  Acc  |
 |-----------------|-------|-------|
