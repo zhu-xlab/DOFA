@@ -54,7 +54,7 @@ Pre-trained model weights can be downloaded from [HuggingFace](https://huggingfa
 
 ## Usage
 
-Please refer to [demo.ipynb](https://github.com/ShadowXZT/DOFA-pytorch/blob/master/demo.ipynb) for more details.
+Please refer to [demo.ipynb](https://github.com/zhu-xlab/DOFA/blob/master/demo.ipynb) for more details.
 
 DOFA supports input images with any number of channels using our pre-trained foundation models. The following examples show how to use DOFA for **Sentinel-1 (SAR)**, **Sentinel-2**, **NAIP RGB**. We will add example usage for Gaofen Multispectral, and Hyperspectral data soon.
 
