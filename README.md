@@ -167,7 +167,7 @@ s1_img = s1_img.view([1,2,224,224]).cuda()
 
 
 ```python
-wavelengths = [3.75, 3.75]
+wavelengths = [5.405, 5.405]
 out_feat = vit_model.forward_features(s1_img, wave_list=wavelengths)
 out_logits = vit_model.forward(s1_img, wave_list=wavelengths)
 print(out_feat.shape)
