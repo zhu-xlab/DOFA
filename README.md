@@ -60,10 +60,6 @@ DOFA supports input images with any number of channels using our pre-trained fou
 
 ---
 
-The following examples show that how to use **a single DOFA model** to process image data from **different modalities** with **any number of channels**!
-
----
-
 ### Using `torch.hub` to Load the DOFA ViT Base Model
 
 This snippet demonstrates how to load a ViT model—specifically, **DOFA ViT Base**—from a GitHub repository that includes a `hubconf.py` entrypoint. The model weights are hosted on Hugging Face via a direct download URL, so **no additional dependencies** beyond PyTorch are required.
