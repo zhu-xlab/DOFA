@@ -18,3 +18,6 @@ def vit_base_dofa(pretrained=True, strict=False, **kwargs):
         model.load_state_dict(state_dict, strict=strict)
 
     return model
+
+
+#TODO: add support to more model types

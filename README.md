@@ -64,13 +64,60 @@ The following examples show that how to use **a single DOFA model** to process i
 
 ---
 
+### Using `torch.hub` to Load the DOFA ViT Base Model
+
+This snippet demonstrates how to load a ViT model—specifically, **DOFA ViT Base**—from a GitHub repository that includes a `hubconf.py` entrypoint. The model weights are hosted on Hugging Face via a direct download URL, so **no additional dependencies** beyond PyTorch are required.
+
+```python
+import torch
+
+model = torch.hub.load(
+    'zhu-xlab/DOFA',
+    'vit_base_dofa',  # The entry point defined in hubconf.py
+    pretrained=True,
+)
+
+model = model.cuda()
+model.eval()
+```
+
+Now the model is ready for inference or further fine-tuning.
+If you would like to fine-tune DOFA on different downstream tasks, please refer to [DOFA-pytorch](github.com/xiong-zhitong/DOFA-pytorch).
+
+
+### TorchGeo
+
+Alternatively, DOFA can be used via the [TorchGeo](https://github.com/microsoft/torchgeo) library:
+
+```python
+import torch
+from torchgeo.models import DOFABase16_Weights, dofa_base_patch16_224
+
+# Example NAIP image (wavelengths in $\mu$m)
+x = torch.rand(2, 4, 224, 224)
+wavelengths = [0.48, 0.56, 0.64, 0.81]
+
+# Use pre-trained model weights
+model = dofa_base_patch16_224(weights=DOFABase16_Weights.DOFA_MAE)
+
+# Make a prediction (model may need to be fine-tuned first)
+y = model(x, wavelengths)
+```
+
+---
+
+
+### Demo usage of DOFA on different data modalities
+
+---
 
 ### Download the pre-trained weights for DOFA from huggingface
+Please move to the `checkpoints` directory and run
 ```python
 python download_weights.py
 ```
 
-### Load the pre-trained weights of DOFA base model
+Please download the `data.zip` for the demo usage from [HF](https://huggingface.co/earthflow/DOFA/resolve/main/data.zip). Then unzip it to the `data` directory.
 
 
 ```python
@@ -298,24 +345,6 @@ print(out_logits.shape)
 Usage for Hyperspectral images is similar to other images.
 
 
-### TorchGeo
-
-Alternatively, DOFA can be used via the [TorchGeo](https://github.com/microsoft/torchgeo) library:
-
-```python
-import torch
-from torchgeo.models import DOFABase16_Weights, dofa_base_patch16_224
-
-# Example NAIP image (wavelengths in $\mu$m)
-x = torch.rand(2, 4, 224, 224)
-wavelengths = [0.48, 0.56, 0.64, 0.81]
-
-# Use pre-trained model weights
-model = dofa_base_patch16_224(weights=DOFABase16_Weights.DOFA_MAE)
-
-# Make a prediction (model may need to be fine-tuned first)
-y = model(x, wavelengths)
-```
 
 ---
 
