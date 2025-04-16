@@ -4,7 +4,7 @@ MODEL = "https://huggingface.co/earthflow/DOFA/resolve/main/DOFA_ViT_base_e100.p
 
 dependencies = ["torch"]
 import torch
-from models_dwv import vit_base_patch16
+from dofa_v1 import vit_base_patch16
 
 def vit_base_dofa(pretrained=True, strict=False, **kwargs):
     model = vit_base_patch16(**kwargs)
