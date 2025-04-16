@@ -13,6 +13,8 @@ from wave_dynamic_layer import (
 import torch
 import torch.nn as nn
 from timm.models.vision_transformer import VisionTransformer
+import math
+import pdb
 
 
 
@@ -51,22 +53,28 @@ class DOFAViT(nn.Module):
 
         self.num_patches = (self.img_size // patch_size) ** 2
         self.patch_embed.num_patches = self.num_patches
-        model_args = dict(patch_size=patch_size, embed_dim=embed_dim, depth=depth, num_heads=num_heads, init_values=1e-5, num_classes=0)
+        model_args = dict(patch_size=patch_size, embed_dim=embed_dim,
+                depth=depth, num_heads=num_heads, init_values=1e-5, num_classes=0, dynamic_img_size=True)
         self.model = VisionTransformer(**model_args)
-        del self.model.patch_embed
+        del self.model.patch_embed.proj
+        self.dynamic_img_size = True
         self.waves = None
         self.norm = norm_layer(embed_dim)
 
-    def forward_features(self, x, wave_list):
+    def forward_features(self, x, wave_list=None):
         # embed patches
+        if wave_list is None:
+            wave_list = [0.665,0.56,0.49]
+            #set to RGB by default
         wavelist = torch.tensor(wave_list, device=x.device).float()
         self.waves = wavelist
         x, _ = self.patch_embed(x, self.waves)
-        hw = self.img_size // self.patch_embed.kernel_size
+        B,HW,C = x.shape
+        hw = int(math.sqrt(HW))
         hw_shape = (hw, hw)
-
+        if self.dynamic_img_size:
+            x = x.view(B,hw,hw,C)
         x = self.model._pos_embed(x)
-        # masking: length -> length * mask_ratio
         x = self.model.patch_drop(x)
         x = self.model.norm_pre(x)
         out_features = []
@@ -87,7 +95,7 @@ class DOFAViT(nn.Module):
         x = self.model.norm(x)
         return out_features
 
-    def forward(self, x, wave_list):
+    def forward(self, x, wave_list=None):
         x = self.forward_features(x, wave_list)
         return x
 
@@ -128,3 +136,5 @@ if __name__=='__main__':
     check_point = torch.load(checkpoint_path)
     vit_model = vit_base_patch14()
     vit_model.load_state_dict(check_point, strict=True)
+    vit_model(torch.randn([1,3,256,256]))
+    vit_model(torch.randn([1,3,512,512]))
