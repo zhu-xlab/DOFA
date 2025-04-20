@@ -2,7 +2,6 @@
 # [DOFA](https://github.com/ShadowXZT/DOFA-pytorch)
 
 
-> 🚨 **16.04.2025 - DOFAv2 is released! Stay tuned for the upcoming preprint!**
 >
 > 🚨 Please use the new version of codes and [weights](https://huggingface.co/XShadow/DOFA). The performance is much better!
 > 
