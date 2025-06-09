@@ -1,7 +1,8 @@
 
 # [DOFA](https://github.com/ShadowXZT/DOFA-pytorch)
 
-
+>
+> 🚨 Examples for using DOFA and DOFAv2 for object detection and instance segmentation with [terratorch](https://github.com/xiong-zhitong/terratorch/tree/main/examples/confs/od_dofav1).
 >
 > 🚨 Please use the new version of codes and [weights](https://huggingface.co/XShadow/DOFA). The performance is much better!
 > 
