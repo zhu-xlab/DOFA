@@ -15,7 +15,7 @@
 
 **Object Detection**: DOFA and DOFA v2 can be used for object detection tasks, which are fundamental remote sensing applications.
 <p align="center">
-<img src="assets/dofa_od.png" width="500">
+<img src="assets/dofa_od.png" width="1200">
 </p>
 
 **What is DOFA**: DOFA is a unified multimodal foundation model for different data modalities in remote sensing and Earth observation.
