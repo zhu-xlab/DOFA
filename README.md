@@ -84,7 +84,7 @@ model.eval()
 ```
 
 Now the model is ready for inference or further fine-tuning.
-If you would like to fine-tune DOFA on different downstream tasks, please refer to [DOFA-pytorch](github.com/xiong-zhitong/DOFA-pytorch).
+If you would like to fine-tune DOFA on different downstream tasks, please refer to [DOFA-pytorch](https://github.com/xiong-zhitong/DOFA-pytorch).
 
 
 ### TorchGeo
