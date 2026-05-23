@@ -84,7 +84,12 @@ model.eval()
 ```
 
 Now the model is ready for inference or further fine-tuning.
-If you would like to fine-tune DOFA on downstream tasks, see `downstream_tasks/geobench_classification` and `downstream_tasks/geobench_segmentation` for GeoBench classification and segmentation examples.
+
+We updated the downstream examples with clean, runnable GeoBench workflows:
+- `downstream_tasks/geobench_classification` shows how to run image classification linear probing with DOFA.
+- `downstream_tasks/geobench_segmentation` shows how to fine-tune DOFA for semantic segmentation with a UPerNet head.
+
+We will add object detection examples very soon.
 
 
 ### TorchGeo
