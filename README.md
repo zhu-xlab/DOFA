@@ -84,7 +84,7 @@ model.eval()
 ```
 
 Now the model is ready for inference or further fine-tuning.
-If you would like to fine-tune DOFA on downstream tasks, see `downstream_tasks/geobench_classification` for a GeoBench image classification linear probing example.
+If you would like to fine-tune DOFA on downstream tasks, see `downstream_tasks/geobench_classification` and `downstream_tasks/geobench_segmentation` for GeoBench classification and segmentation examples.
 
 
 ### TorchGeo

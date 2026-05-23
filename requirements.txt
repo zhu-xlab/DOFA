@@ -7,3 +7,5 @@ geobench
 torchmetrics
 tensorboard
 numpy
+mmsegmentation
+mmcv
