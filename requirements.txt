@@ -6,4 +6,4 @@ torchvision
 geobench
 torchmetrics
 tensorboard
-numpy
+numpy==1.26.4
