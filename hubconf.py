@@ -2,11 +2,14 @@ MODEL = "https://huggingface.co/earthflow/DOFA/resolve/main/DOFA_ViT_base_e100.p
 
 # hubconf.py
 
-dependencies = ["torch"]
+dependencies = ["torch", "timm"]
 import torch
-from dofa_v1 import vit_base_patch16
 
 def vit_base_dofa(pretrained=True, strict=False, **kwargs):
+    # Import inside the entrypoint so Torch Hub can report a missing dependency
+    # before this timm-dependent import runs.
+    from dofa_v1 import vit_base_patch16
+
     model = vit_base_patch16(**kwargs)
 
     if pretrained:
