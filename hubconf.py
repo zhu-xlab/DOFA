@@ -1,4 +1,4 @@
-MODEL = "https://huggingface.co/earthflow/DOFA/resolve/main/DOFA_ViT_base_e100.pth"
+MODEL = "https://huggingface.co/earthflow/DOFA/resolve/ef59b0580b0093c9bd342e0438efcee37f7b369e/DOFA_ViT_base_e100.pth"
 
 # hubconf.py
 
