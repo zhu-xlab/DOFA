@@ -68,7 +68,7 @@ DOFA supports input images with any number of channels using our pre-trained fou
 
 ### Using `torch.hub` to Load the DOFA ViT Base Model
 
-This snippet demonstrates how to load a ViT model—specifically, **DOFA ViT Base**—from a GitHub repository that includes a `hubconf.py` entrypoint. The model weights are hosted on Hugging Face via a direct download URL, so **no additional dependencies** beyond PyTorch are required.
+This snippet demonstrates how to load a ViT model—specifically, **DOFA ViT Base**—from a GitHub repository that includes a `hubconf.py` entrypoint. The model weights are hosted on Hugging Face via a direct download URL. The Torch Hub entrypoint requires PyTorch and `timm`, so install the tested version first with `pip install timm==0.9.2`.
 
 ```python
 import torch
